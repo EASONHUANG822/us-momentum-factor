@@ -6,3 +6,4 @@ lxml>=4.9
 matplotlib>=3.7
 statsmodels>=0.14
 pytest>=7.0
+markdown>=3.5
