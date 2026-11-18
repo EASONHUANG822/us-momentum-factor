@@ -1,5 +1,7 @@
 # 美股动量因子复现（Jegadeesh–Titman 12-1 Momentum）
 
+🌐 在线报告：https://us-momentum-factor.pages.dev
+
 用 Python 在美股（S&P 500 成分股）上复现经典的截面动量因子 **WML（Winners Minus Losers）**，并用 Ken French 数据库中的官方 **UMD** 因子做对照验证。
 
 ## 方法
@@ -102,6 +104,13 @@ python run.py --start 1995-01-01 --cost-bps 20 --buckets 5   # 自定义参数
 python robustness.py   # 参数网格 + 成本敏感性
 ```
 
+发布在线报告（Cloudflare Pages）：
+
+```bash
+python build_site.py   # README + results/ -> site/
+npx wrangler pages deploy site --project-name us-momentum-factor --branch main
+```
+
 首次运行会下载约 500 只股票 25 年的数据并缓存到 `data/`（已 gitignore）。
 
 ## 项目结构
@@ -113,6 +122,7 @@ momentum/
   analysis.py   # 绩效统计、Newey-West 回归
 run.py          # 主程序：回测 + 对比 + 作图
 robustness.py   # 稳健性检验：形成期 / skip / 分组数 / 交易成本
+build_site.py   # 生成静态网站（Cloudflare Pages）
 tests/          # 前视偏差 / 分组 / 收益对齐 / 已知动量恢复 测试
 results/        # 输出图表与 CSV
 ```
